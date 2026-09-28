@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>?????</title>
+<meta property="og:title" content="?????">
+<meta property="og:description" content="?????">
+<meta name="description" content="?????">
+<link rel="icon" href="data:,">
+<style>
+:root{--bg:#fff5f7;--fg:#3a1a24;--mut:#9a6b7a;--card:#fff;--pk:#ff4d79;--bd:#ffd0dc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0f14;--fg:#ffe9ef;--mut:#c48a9b;--card:#2a1620;--bd:#4a2534}}
+:root[data-theme="dark"]{--bg:#1a0f14;--fg:#ffe9ef;--mut:#c48a9b;--card:#2a1620;--bd:#4a2534}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:"Prompt","Noto Sans Thai",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.w{width:min(92vw,420px);text-align:center;position:relative;z-index:2}
+.e{font-size:clamp(72px,24vw,120px);font-weight:800;line-height:1;display:flex;justify-content:center;align-items:center;gap:4px}
+.h{color:var(--pk);display:inline-block;animation:b 1s infinite}
+@keyframes b{50%{transform:scale(1.2)}}
+h1{font-size:1.15rem;margin:.6rem 0 .2rem}
+.s{color:var(--mut);font-size:.9rem;min-height:1.4em}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin:14px 0;text-align:left;font:.8rem/1.6 ui-monospace,monospace;min-height:96px}
+.bar{height:8px;background:var(--bd);border-radius:9px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;width:0;background:var(--pk);transition:width .3s}
+.r{font-size:1.25rem;font-weight:700;margin:6px 0;color:var(--pk);min-height:1.6em}
+button{font:inherit;border:0;border-radius:99px;padding:11px 20px;margin:4px;cursor:pointer;background:var(--pk);color:#fff;font-weight:600}
+button.g{background:transparent;color:var(--pk);border:1.5px solid var(--pk)}
+button[hidden]{display:none}
+.f{position:fixed;bottom:-30px;animation:u linear forwards;z-index:1;pointer-events:none}
+@keyframes u{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+</style></head><body>
+<div class="w">
+<div class="e">404</div>
+<h1>ไม่พบหน้าที่ต้องการ</h1>
+<div class="s" id="sub">Error 404 : Page not found</div>
+<div class="box"><div id="log"></div><div class="bar"><i id="pg"></i></div></div>
+<div class="r" id="res"></div>
+<div id="btns"><button id="b1" hidden>🔍 ค้นหาใหม่</button><button class="g" id="b2" hidden>🏠 กลับหน้าหลัก</button></div>
+</div>
+<script>
+var log=document.getElementById('log'),pg=document.getElementById('pg'),res=document.getElementById('res'),sub=document.getElementById('sub'),b1=document.getElementById('b1'),b2=document.getElementById('b2');
+var n=0,busy=false;
+var steps=["> กำลังค้นหา: คนที่รักแบมมากกว่านี้...","> สแกนประชากรโลก 8,100,000,000 คน","> ตรวจสอบทุกทวีป รวมทั้งแอนตาร์กติกา","> เทียบระดับความรัก... ความรักของวีเกินสเกล"];
+var fails=["พบ 0 คน 😌","พบ 0 คน (ลองแล้วก็ยังไม่เจอ)","ระบบเริ่มงงแล้ว: 0 คน","ยอมแล้ว 🏳️ ไม่มีจริงๆ"];
+function heart(){for(var i=0;i<14;i++){var s=document.createElement('span');s.className='f';s.textContent=['❤️','💖','💕'][i%3];s.style.left=Math.random()*95+'vw';s.style.fontSize=(16+Math.random()*22)+'px';s.style.animationDuration=(3+Math.random()*3)+'s';document.body.appendChild(s);setTimeout(function(x){x.remove()},6500,s)}}
+function scan(){
+ if(busy)return;busy=true;b1.hidden=b2.hidden=true;res.textContent='';log.innerHTML='';pg.style.width='0';sub.textContent='กำลังประมวลผล...';
+ var i=0;(function t(){
+  if(i<steps.length){log.innerHTML+=steps[i]+'<br>';pg.style.width=((i+1)*24)+'%';i++;setTimeout(t,750)}
+  else{pg.style.width='100%';log.innerHTML+='> เสร็จสิ้น';res.textContent=fails[Math.min(n,fails.length-1)];sub.textContent='ไม่พบคนที่รักแบมมากกว่านี้';n++;busy=false;b1.hidden=b2.hidden=false;heart()}
+ })();
+}
+b1.onclick=scan;
+b2.onclick=function(){
+ b1.hidden=b2.hidden=true;log.innerHTML='> ผลลัพธ์เดียวที่พบ:<br>> ชื่อ: วี<br>> สถานะ: รักแบมที่สุดในโลก<br>> ความมั่นใจ: 100%';
+ res.textContent='ร้ากแบมที่สุดเยยย ❤️';sub.textContent='';heart();setTimeout(heart,800);
+};
+scan();
+</script></body></html>
